@@ -10,11 +10,40 @@ import PasswordRoutes from './Passwords/PasswordRoutes';
 import Register from './Register';
 import UserRoutes from './Users/UserRoutes';
 
+import Navigation from './Navigation';
+
+/* 
+starter app()
+*/
+// function App() {
+//   return (
+//     <AuthContextProvider>
+//       <Router>
+//         <Header />
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           <Route path="/login" element={<Login />} />
+//           <Route path="/passwords/*" element={<PasswordRoutes />} />
+//           {process.env.REACT_APP_FEATURE_REGISTRATION === 'true' && <Route path="/register" element={<Register />} />}
+//           <Route
+//             path="/account/*"
+//             element={
+//               <AuthProtected>
+//                 <UserRoutes />
+//               </AuthProtected>
+//             }
+//           />
+//         </Routes>
+//       </Router>
+//     </AuthContextProvider>
+//   );
+// }
+
 function App() {
   return (
     <AuthContextProvider>
       <Router>
-        <Header />
+        <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
