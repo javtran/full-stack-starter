@@ -1,21 +1,18 @@
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import ArtistContainer from './ArtistContainer';
-import UserForm from './Users/UserForm';
-import './Home.scss';
+import TrackContainer from './TrackContainer';
+import './Tracks.scss';
 
 var AIRTABLE_URL = 'https://api.airtable.com/v0/appPCKY59FaMZWsi4/Table%201';
 var KEY_QUERY = 'api_key=key8nUdblw0IguYvd';
-var ARTIST_QUERY = 'field%5D=Artist&field%5D=Album_Image';
+var TRACK_QUERY = 'field%5D=Artist&field%5D=Album_Image&field%5D=Album&field%5D=Duration&field%5D=Track';
 
-function Home() {
+function Tracks() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
-    fetch(`${AIRTABLE_URL}?${KEY_QUERY}&${ARTIST_QUERY}`)
+    fetch(`${AIRTABLE_URL}?${KEY_QUERY}&${TRACK_QUERY}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`This is an HTTP error: The status is ${response.status}`);
@@ -37,7 +34,7 @@ function Home() {
   }, []);
   return (
     <main className="container">
-      <h1>Artists</h1>
+      <h1>Tracks</h1>
       {loading && (
         <div className="loading">
           <span class="blob1 blob"></span>
@@ -46,9 +43,9 @@ function Home() {
         </div>
       )}
       {error && <div>{`There is a problem fetching the post data - ${error}`}</div>}
-      <div className="artist-content">{data && data.map(({ id, fields }) => <ArtistContainer dataFromParent={{ id, fields }} />)}</div>
+      <ul className="track-content">{data && data.map(({ id, fields }) => <TrackContainer dataFromParent={{ id, fields }} />)}</ul>
     </main>
   );
 }
 
-export default Home;
+export default Tracks;

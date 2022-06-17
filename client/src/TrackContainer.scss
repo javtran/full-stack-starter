@@ -1,0 +1,51 @@
+.track-individual {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+a.track-individual {
+  color: #ffffff;
+  text-decoration: none;
+}
+a.track-individual:hover {
+  background-color: rgb(45, 45, 45);
+  color: #ffffff;
+}
+
+.track-image {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  min-width: 50px;
+}
+
+.track-detail {
+  gap: 10px;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.album-name {
+  padding-top: 10px;
+}
+
+.duration {
+  padding-top: 10px;
+  text-align: right;
+}
+
+@media screen and (max-width: 72em) {
+  .album-name {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 42em) {
+  .duration {
+    display: none;
+  }
+}

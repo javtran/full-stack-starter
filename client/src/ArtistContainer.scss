@@ -1,0 +1,28 @@
+.artist-container {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+.artist-name {
+  color: white;
+  text-decoration: none;
+}
+.artist-name:hover {
+  color: white;
+}
+
+.artist-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: border-width 0.15s linear, width 0.2s, height 0.2s;
+}
+
+.artist-image:hover {
+  border: 5px solid #777;
+  width: 210px;
+  height: 210px;
+}

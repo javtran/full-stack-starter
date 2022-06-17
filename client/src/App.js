@@ -11,6 +11,7 @@ import Register from './Register';
 import UserRoutes from './Users/UserRoutes';
 
 import Navigation from './Navigation';
+import Tracks from './Tracks';
 
 /* 
 starter app()
@@ -44,20 +45,12 @@ function App() {
     <AuthContextProvider>
       <Router>
         <Navigation />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/passwords/*" element={<PasswordRoutes />} />
-          {process.env.REACT_APP_FEATURE_REGISTRATION === 'true' && <Route path="/register" element={<Register />} />}
-          <Route
-            path="/account/*"
-            element={
-              <AuthProtected>
-                <UserRoutes />
-              </AuthProtected>
-            }
-          />
-        </Routes>
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tracks" element={<Tracks />} />
+          </Routes>
+        </div>
       </Router>
     </AuthContextProvider>
   );
