@@ -3,15 +3,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.scss';
 
 import { AuthContextProvider, AuthProtected } from './AuthContext';
-import Header from './Header';
-import Home from './Home';
-import Login from './Login';
-import PasswordRoutes from './Passwords/PasswordRoutes';
-import Register from './Register';
-import UserRoutes from './Users/UserRoutes';
+// import Header from './Header';
+// import Home from './Home';
+// import Login from './Login';
+// import PasswordRoutes from './Passwords/PasswordRoutes';
+// import Register from './Register';
+// import UserRoutes from './Users/UserRoutes';
 
+import Artist from './Artist/Artist';
 import Navigation from './Navigation';
-import Tracks from './Tracks';
+import Tracks from './Tracks/Tracks';
+import ArtistDetail from './Artist/ArtistDetail';
 
 /* 
 starter app()
@@ -47,8 +49,9 @@ function App() {
         <Navigation />
         <div className="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Artist />} />
             <Route path="/tracks" element={<Tracks />} />
+            <Route path="/artists/:id" element={<ArtistDetail />} />
           </Routes>
         </div>
       </Router>
