@@ -24,7 +24,6 @@ function Artist() {
       })
       .then((actualData) => {
         setData(actualData.records);
-        console.log(data);
         setError(null);
       })
       .catch((err) => {
