@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import TrackContainer from './TrackContainer';
+import TrackContainer from './TrackContainer/TrackContainer';
 import './Tracks.scss';
 
 var AIRTABLE_URL = 'https://api.airtable.com/v0/appPCKY59FaMZWsi4/Table%201';

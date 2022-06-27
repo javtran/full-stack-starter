@@ -13,7 +13,7 @@ import { AuthContextProvider, AuthProtected } from './AuthContext';
 import Artist from './Artist/Artist';
 import Navigation from './Navigation';
 import Tracks from './Tracks/Tracks';
-import ArtistDetail from './Artist/ArtistDetail';
+import ArtistDetail from './ArtistDetail/ArtistDetail';
 
 /* 
 starter app()

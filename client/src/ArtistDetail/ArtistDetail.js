@@ -1,4 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import ArtistDetailHeader from './ArtistDetailHeader/ArtistDetailHeader';
+import AlbumComponent from './AlbumComponent/AlbumComponent';
+import './ArtistDetail.scss';
 
 var AIRTABLE_URL = 'https://api.airtable.com/v0/appPCKY59FaMZWsi4/Table%201';
 var AIRTABLE_URL2 = 'https://api.airtable.com/v0/appPCKY59FaMZWsi4/Table%203';
@@ -7,12 +12,13 @@ var ARTIST_QUERY = 'field%5D=Artist&field%5D=Album_Image';
 
 function ArtistDetail() {
   const [header, setHeader] = useState(null);
-  const [tracks, setTracks] = useState(null);
+  const [albums, setAlbum] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const path = window.location.pathname;
-  const param = path.split('/')[2].split('&');
+  const { id } = useParams();
+
+  const param = id.split('&');
 
   useEffect(() => {
     fetch(`${AIRTABLE_URL}/${param[0]}?${KEY_QUERY}`)
@@ -24,7 +30,6 @@ function ArtistDetail() {
       })
       .then((actualData) => {
         setHeader(actualData.fields);
-        console.log(actualData);
         setError(null);
       })
       .catch((err) => {
@@ -54,13 +59,14 @@ function ArtistDetail() {
             fetchArtistTracks(data.offset);
             return;
           } else {
-            setTracks(tracklist);
+            setAlbum(tracklist);
+            console.log(tracklist);
           }
           setError(null);
         })
         .catch((err) => {
           setError(err.message);
-          setHeader(null);
+          setAlbum(null);
         })
         .finally(() => {
           setLoading(false);
@@ -71,15 +77,10 @@ function ArtistDetail() {
   }, []);
 
   return (
-    <div>
-      {header && (
-        <div>
-          <a className="artist-image">
-            <img src={header.Album_Image.split(',')[1]} alt="Artist" />
-          </a>
-          <a class="artist-name">{header.Artist}</a>
-        </div>
-      )}
+    <div className="container">
+      {header && <ArtistDetailHeader header={header} />}
+      <div className="sub-title">Artist's Work</div>
+      {albums && albums.map((album) => <AlbumComponent album={album} />)}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import ArtistContainer from './ArtistContainer';
+import ArtistContainer from './ArtistContainer/ArtistContainer';
 import UserForm from '../Users/UserForm';
 import './Artist.scss';
 

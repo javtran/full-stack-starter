@@ -1,0 +1,25 @@
+.artist-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: border-width 0.15s linear, width 0.2s, height 0.2s;
+
+  :hover {
+    border: 5px solid #777;
+    width: 210px;
+    height: 210px;
+  }
+}
+
+.artist-detail-name {
+  color: white;
+  text-decoration: none;
+  font-size: 72px;
+  font-weight: 700;
+  padding-left: 25px;
+}
+
+.artist-detail-name:hover {
+  color: white;
+  text-decoration: underline;
+}
