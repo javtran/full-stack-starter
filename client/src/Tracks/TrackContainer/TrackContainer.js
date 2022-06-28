@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import './TrackContainer.scss';
 
 function TrackContainer({ dataFromParent }) {
@@ -13,10 +15,8 @@ function TrackContainer({ dataFromParent }) {
   }
   return (
     <li>
-      <a className="track-individual" href="index.html?tracks?${data.records[i].id}">
-        <div>
-          <img className="track-image" src={array_image[1]} alt="Artist" />
-        </div>
+      <Link className="track-individual" to={id}>
+        <img className="track-image" src={array_image[0]} alt="Artist" />
         <div className="track-detail">
           <div className="row">
             <span className="col-6 d-flex flex-column">
@@ -29,7 +29,7 @@ function TrackContainer({ dataFromParent }) {
             </span>
           </div>
         </div>
-      </a>
+      </Link>
     </li>
   );
 }

@@ -36,9 +36,7 @@ function ArtistDetail() {
         setError(err.message);
         setHeader(null);
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => {});
     var tracklist = [];
     function fetchArtistTracks(offset) {
       const query = offset ? `${AIRTABLE_URL2}?${KEY_QUERY}&offset=${offset}` : `${AIRTABLE_URL2}?${KEY_QUERY}`;
@@ -60,6 +58,7 @@ function ArtistDetail() {
             return;
           } else {
             setAlbum(tracklist);
+            setLoading(false);
             console.log(tracklist);
           }
           setError(null);
@@ -68,9 +67,7 @@ function ArtistDetail() {
           setError(err.message);
           setAlbum(null);
         })
-        .finally(() => {
-          setLoading(false);
-        });
+        .finally(() => {});
       return;
     }
     fetchArtistTracks(null);
@@ -78,9 +75,16 @@ function ArtistDetail() {
 
   return (
     <div className="container">
-      {header && <ArtistDetailHeader header={header} />}
-      <div className="sub-title">Artist's Work</div>
-      {albums && albums.map((album) => <AlbumComponent album={album} />)}
+      {loading && (
+        <div className="loading">
+          <span class="blob1 blob"></span>
+          <span class="blob2 blob"></span>
+          <span class="blob3 blob"></span>
+        </div>
+      )}
+      {header && albums && <ArtistDetailHeader header={header} />}
+      {header && albums && <div className="sub-title">Artist's Work</div>}
+      {header && albums && albums.map((album) => <AlbumComponent album={album} />)}
     </div>
   );
 }

@@ -14,6 +14,7 @@ import Artist from './Artist/Artist';
 import Navigation from './Navigation';
 import Tracks from './Tracks/Tracks';
 import ArtistDetail from './ArtistDetail/ArtistDetail';
+import TrackDetail from './TrackDetail/TrackDetail';
 
 /* 
 starter app()
@@ -52,6 +53,7 @@ function App() {
             <Route path="/" element={<Artist />} />
             <Route path="/tracks" element={<Tracks />} />
             <Route path="/artists/:id" element={<ArtistDetail />} />
+            <Route path="/tracks/:id" element={<TrackDetail />} />
           </Routes>
         </div>
       </Router>
