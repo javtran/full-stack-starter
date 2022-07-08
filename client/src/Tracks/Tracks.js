@@ -21,7 +21,6 @@ function Tracks() {
       })
       .then((actualData) => {
         setData(actualData.records);
-        console.log(data);
         setError(null);
       })
       .catch((err) => {
@@ -37,13 +36,20 @@ function Tracks() {
       <h1>Tracks</h1>
       {loading && (
         <div className="loading">
-          <span class="blob1 blob"></span>
-          <span class="blob2 blob"></span>
-          <span class="blob3 blob"></span>
+          <span className="blob1 blob"></span>
+          <span className="blob2 blob"></span>
+          <span className="blob3 blob"></span>
         </div>
       )}
       {error && <div>{`There is a problem fetching the post data - ${error}`}</div>}
-      <ul className="track-content">{data && data.map(({ id, fields }) => <TrackContainer dataFromParent={{ id, fields }} />)}</ul>
+      <ul className="track-content">
+        {data &&
+          data.map(({ id, fields }, index) => (
+            <div className="track-list-animation" style={{ '--animation-order': index }}>
+              <TrackContainer dataFromParent={{ id, fields }} />
+            </div>
+          ))}
+      </ul>
     </main>
   );
 }

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import TrackDetailHeader from './TrackDetailHeader/TrackDetailHeader';
+
 var AIRTABLE_URL = 'https://api.airtable.com/v0/appPCKY59FaMZWsi4/Table%201';
 var KEY_QUERY = 'api_key=key8nUdblw0IguYvd';
 
@@ -31,7 +33,12 @@ function TrackDetail() {
         setLoading(false);
       });
   }, []);
-  return <div>{data && console.log(data)}</div>;
+  return (
+    <main className="container">
+      <div>{data && <TrackDetailHeader prop={data} />}</div>
+      <div className="row d-flex justify-content-center"></div>
+    </main>
+  );
 }
 
 export default TrackDetail;

@@ -45,7 +45,14 @@ function Artist() {
         </div>
       )}
       {error && <div>{`There is a problem fetching the post data - ${error}`}</div>}
-      <div className="artist-content">{data && data.map(({ id, fields }) => <ArtistContainer dataFromParent={{ id, fields }} />)}</div>
+      <div className="artist-content">
+        {data &&
+          data.map(({ id, fields }, index) => (
+            <div className="track-list-animation" style={{ '--animation-order': index }}>
+              <ArtistContainer dataFromParent={{ id, fields }} />
+            </div>
+          ))}
+      </div>
     </main>
   );
 }

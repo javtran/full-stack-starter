@@ -23,8 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       AlbumDate: DataTypes.STRING,
       Track: DataTypes.STRING,
       TrackID: DataTypes.STRING,
-      Track: DataTypes.STRING,
-      TrackID: DataTypes.STRING,
       TrackUrl: DataTypes.STRING,
       Duration: DataTypes.STRING,
       TrackPopularity: DataTypes.STRING,
