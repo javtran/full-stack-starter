@@ -27,6 +27,14 @@ function Navigation() {
                 <i class="fa fa-music"></i>
               </span>
             </li>
+            <li>
+              <a href="https://open.spotify.com/playlist/5hvQZZVI52kgqm7XNZ8zBu?si=093221aa53264656" target="”_blank”">
+                Add
+              </a>
+              <span class="icon">
+                <i class="fa fa-plus"></i>
+              </span>
+            </li>
           </ul>
         </div>
       </nav>
