@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const fetch = require('node-fetch');
+
+const models = require('../models');
+
+fetch(`https://api.airtable.com/v0/appPCKY59FaMZWsi4/tblUrPWzVgCr9wOtv?api_key=key8nUdblw0IguYvd`)
+  .then((response) => response.json())
+  .then(async (data) => {
+    for (const record of data.records) {
+      const { fields } = record;
+      const track = models.Playlist.build({
+        Artist: fields.Artist,
+        Artist_ID: fields.Artist_ID,
+        Artist_URL: fields.Artist_URL,
+        Album: fields.Album,
+        Album_ID: fields.Album_ID,
+        Album_URL: fields.Album_URL,
+        Album_Image: fields.Album_Image,
+        Album_Date: fields.Album_Date,
+        Track: fields.Track,
+        Track_ID: fields.Track_ID,
+        Track_URL: fields.Track_URL,
+        Duration: fields.Duration,
+        Track_Popularity: fields.Track_Popularity,
+        Tempo: fields.Tempo,
+        Key: fields.Key,
+        Energy: fields.Energy,
+        Acousticness: fields.Acousticness,
+        Danceability: fields.Danceability,
+        Liveness: fields.Liveness,
+        Loudness: fields.Loudness,
+        Speechiness: fields.Speechiness,
+      });
+      await track.save();
+    }
+  });
+
+fetch(`https://api.airtable.com/v0/appPCKY59FaMZWsi4/tblVgfQMhyPCmBd8h?api_key=key8nUdblw0IguYvd`)
+  .then((response) => response.json())
+  .then(async (data) => {
+    for (const record of data.records) {
+      const { fields } = record;
+      const album = models.Album.build({
+        Artist: fields.Artist,
+        Artist_ID: fields.Artist_ID,
+        Album_Name: fields.Album_Name,
+        Image: fields.Image,
+        URL: fields.URL,
+        Album_Type: fields.Album_Type,
+        Track_Number: fields.Track_Number,
+        Release_Date: fields.Release_Date,
+      });
+      await album.save();
+    }
+  });

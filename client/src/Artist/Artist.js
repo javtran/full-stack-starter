@@ -15,7 +15,8 @@ function Artist() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${AIRTABLE_URL}?${KEY_QUERY}&${ARTIST_QUERY}`)
+    // fetch(`${AIRTABLE_URL}?${KEY_QUERY}&${ARTIST_QUERY}`)
+    fetch(`/api/playlists`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`This is an HTTP error: The status is ${response.status}`);
@@ -23,7 +24,16 @@ function Artist() {
         return response.json();
       })
       .then((actualData) => {
-        setData(actualData.records);
+        // setData(actualData.records);
+        let artistArray = [];
+        let filteredData = [];
+        for (let i = 0; i < actualData.length; i++) {
+          if (!artistArray.includes(actualData[i].Artist_ID)) {
+            artistArray.push(actualData[i].Artist_ID);
+            filteredData.push(actualData[i]);
+          }
+        }
+        setData(filteredData);
         setError(null);
       })
       .catch((err) => {
@@ -47,9 +57,14 @@ function Artist() {
       {error && <div>{`There is a problem fetching the post data - ${error}`}</div>}
       <div className="artist-content">
         {data &&
-          data.map(({ id, fields }, index) => (
+          // data.map(({ id, fields }, index) => (
+          //   <div className="track-list-animation" style={{ '--animation-order': index }}>
+          //     <ArtistContainer dataFromParent={{ id, fields }} />
+          //   </div>
+          // ))
+          data.map((track, index) => (
             <div className="track-list-animation" style={{ '--animation-order': index }}>
-              <ArtistContainer dataFromParent={{ id, fields }} />
+              <ArtistContainer dataFromParent={track} />
             </div>
           ))}
       </div>

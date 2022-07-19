@@ -11,46 +11,46 @@ module.exports = {
       Artist: {
         type: Sequelize.STRING,
       },
-      ArtistID: {
+      Artist_ID: {
         type: Sequelize.STRING,
       },
-      ArtistUrl: {
+      Artist_URL: {
         type: Sequelize.STRING,
       },
       Album: {
         type: Sequelize.STRING,
       },
-      AlbumID: {
+      Album_ID: {
         type: Sequelize.STRING,
       },
-      AlbumUrl: {
+      Album_URL: {
         type: Sequelize.STRING,
       },
-      AlbumImage: {
+      Album_Image: {
         type: Sequelize.STRING,
       },
-      AlbumDate: {
-        type: Sequelize.STRING,
-      },
-      Track: {
-        type: Sequelize.STRING,
-      },
-      TrackID: {
+      Album_Date: {
         type: Sequelize.STRING,
       },
       Track: {
         type: Sequelize.STRING,
       },
-      TrackID: {
+      Track_ID: {
         type: Sequelize.STRING,
       },
-      TrackUrl: {
+      Track: {
+        type: Sequelize.STRING,
+      },
+      Track_ID: {
+        type: Sequelize.STRING,
+      },
+      Track_URL: {
         type: Sequelize.STRING,
       },
       Duration: {
         type: Sequelize.STRING,
       },
-      TrackPopularity: {
+      Track_Popularity: {
         type: Sequelize.STRING,
       },
       Tempo: {

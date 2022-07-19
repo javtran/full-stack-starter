@@ -22,4 +22,18 @@ describe('/api/playlists', () => {
       console.log(tracks);
     });
   });
+
+  describe('GET /:id', () => {
+    it('returns one Item by id', async () => {
+      const response = await testSession.get('/api/playlists/2').expect(HttpStatus.OK);
+      const track = response.body;
+      assert.deepStrictEqual(track.Artist, 'STAYC');
+      assert.deepStrictEqual(track.Album, 'Star To A Young Culture');
+      assert.deepStrictEqual(track.Track, 'SO BAD');
+    });
+
+    it('returns NOT FOUND for an id not in the database', async () => {
+      await testSession.get('/api/items/0').expect(HttpStatus.NOT_FOUND);
+    });
+  });
 });

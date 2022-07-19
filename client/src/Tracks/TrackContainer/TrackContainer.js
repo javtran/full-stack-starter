@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import './TrackContainer.scss';
 
 function TrackContainer({ dataFromParent }) {
-  const { id, fields } = dataFromParent;
-  const { Artist, Album_Image, Album, Duration, Track } = fields;
+  // const { id, fields } = dataFromParent;
+  // const { Artist, Album_Image, Album, Duration, Track } = fields;
+  const { id, Artist, Album_Image, Album, Duration, Track } = dataFromParent;
 
   let array_image = Album_Image.split(',');
   var intDuration = parseInt(Duration);
@@ -15,7 +16,7 @@ function TrackContainer({ dataFromParent }) {
   }
   return (
     <li>
-      <Link className="track-individual" to={id}>
+      <Link className="track-individual" to={id.toString()}>
         <img className="track-image" src={array_image[0]} alt="Artist" />
         <div className="track-detail">
           <div className="row">

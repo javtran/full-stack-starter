@@ -30,7 +30,8 @@ function TrackDetail() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`${AIRTABLE_URL}/${id}?${KEY_QUERY}`)
+    // fetch(`${AIRTABLE_URL}/${id}?${KEY_QUERY}`)
+    fetch(`/api/playlists/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`This is an HTTP error: The status is ${response.status}`);
@@ -38,7 +39,8 @@ function TrackDetail() {
         return response.json();
       })
       .then((actualData) => {
-        setData(actualData.fields);
+        // setData(actualData.fields);
+        setData(actualData);
         setError(null);
       })
       .catch((err) => {

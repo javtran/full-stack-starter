@@ -1,3 +1,4 @@
+import { set } from 'lodash';
 import { useState, useEffect } from 'react';
 
 import TrackContainer from './TrackContainer/TrackContainer';
@@ -12,7 +13,8 @@ function Tracks() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
-    fetch(`${AIRTABLE_URL}?${KEY_QUERY}&${TRACK_QUERY}`)
+    // fetch(`${AIRTABLE_URL}?${KEY_QUERY}&${TRACK_QUERY}`)
+    fetch(`/api/playlists`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`This is an HTTP error: The status is ${response.status}`);
@@ -20,7 +22,8 @@ function Tracks() {
         return response.json();
       })
       .then((actualData) => {
-        setData(actualData.records);
+        // setData(actualData.records);
+        setData(actualData);
         setError(null);
       })
       .catch((err) => {
@@ -44,9 +47,14 @@ function Tracks() {
       {error && <div>{`There is a problem fetching the post data - ${error}`}</div>}
       <ul className="track-content">
         {data &&
-          data.map(({ id, fields }, index) => (
+          // data.map(({ id, fields }, index) => (
+          //   <div className="track-list-animation" style={{ '--animation-order': index }}>
+          //     <TrackContainer dataFromParent={{ id, fields }} />
+          //   </div>
+          // ))
+          data.map((track, index) => (
             <div className="track-list-animation" style={{ '--animation-order': index }}>
-              <TrackContainer dataFromParent={{ id, fields }} />
+              <TrackContainer dataFromParent={track} />
             </div>
           ))}
       </ul>

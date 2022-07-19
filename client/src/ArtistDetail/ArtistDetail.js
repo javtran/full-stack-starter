@@ -6,7 +6,7 @@ import AlbumComponent from './AlbumComponent/AlbumComponent';
 import './ArtistDetail.scss';
 
 var AIRTABLE_URL = 'https://api.airtable.com/v0/appPCKY59FaMZWsi4/Table%201';
-var AIRTABLE_URL2 = 'https://api.airtable.com/v0/appPCKY59FaMZWsi4/Table%203';
+var AIRTABLE_URL2 = 'https://api.airtable.com/v0/appPCKY59FaMZWsi4/tblVgfQMhyPCmBd8h';
 var KEY_QUERY = 'api_key=key8nUdblw0IguYvd';
 var ARTIST_QUERY = 'field%5D=Artist&field%5D=Album_Image';
 
@@ -21,7 +21,7 @@ function ArtistDetail() {
   const param = id.split('&');
 
   useEffect(() => {
-    fetch(`${AIRTABLE_URL}/${param[0]}?${KEY_QUERY}`)
+    fetch(`/api/playlists/${param[0]}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`This is an HTTP error: The status is ${response.status}`);
@@ -29,7 +29,8 @@ function ArtistDetail() {
         return response.json();
       })
       .then((actualData) => {
-        setHeader(actualData.fields);
+        // setHeader(actualData.fields);
+        setHeader(actualData);
         setError(null);
       })
       .catch((err) => {
@@ -38,39 +39,62 @@ function ArtistDetail() {
       })
       .finally(() => {});
     var tracklist = [];
-    function fetchArtistTracks(offset) {
-      const query = offset ? `${AIRTABLE_URL2}?${KEY_QUERY}&offset=${offset}` : `${AIRTABLE_URL2}?${KEY_QUERY}`;
-      fetch(query)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`This is an HTTP error: The status is ${response.status}`);
+    // function fetchArtistTracks(offset) {
+    //   const query = offset ? `${AIRTABLE_URL2}?${KEY_QUERY}&offset=${offset}` : `${AIRTABLE_URL2}?${KEY_QUERY}`;
+    //   fetch(query)
+    //     .then((response) => {
+    //       if (!response.ok) {
+    //         throw new Error(`This is an HTTP error: The status is ${response.status}`);
+    //       }
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       for (var i = 0; i < data.records.length; i++) {
+    //         if (data.records[i].fields['Artist_ID'] == param[1]) {
+    //           tracklist.push(data.records[i]);
+    //         }
+    //       }
+    //       if (data.offset !== undefined) {
+    //         fetchArtistTracks(data.offset);
+    //         return;
+    //       } else {
+    //         setAlbum(tracklist);
+    //         setLoading(false);
+    //         console.log(tracklist);
+    //       }
+    //       setError(null);
+    //     })
+    //     .catch((err) => {
+    //       setError(err.message);
+    //       setAlbum(null);
+    //     })
+    //     .finally(() => {});
+    //   return;
+    // }
+    // fetchArtistTracks(null);
+    fetch(`/api/albums`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`This is an HTTP error: The status is ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].Artist_ID == param[1] && !tracklist.includes(data[i])) {
+            tracklist.push(data[i]);
           }
-          return response.json();
-        })
-        .then((data) => {
-          for (var i = 0; i < data.records.length; i++) {
-            if (data.records[i].fields['Artist_ID'] == param[1]) {
-              tracklist.push(data.records[i]);
-            }
-          }
-          if (data.offset !== undefined) {
-            fetchArtistTracks(data.offset);
-            return;
-          } else {
-            setAlbum(tracklist);
-            setLoading(false);
-            console.log(tracklist);
-          }
-          setError(null);
-        })
-        .catch((err) => {
-          setError(err.message);
-          setAlbum(null);
-        })
-        .finally(() => {});
-      return;
-    }
-    fetchArtistTracks(null);
+        }
+        console.log(tracklist);
+        setAlbum(tracklist);
+        setLoading(false);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setAlbum(null);
+      })
+      .finally(() => {});
   }, []);
 
   return (

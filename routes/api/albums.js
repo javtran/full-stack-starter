@@ -9,12 +9,13 @@ const helpers = require('../helpers');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const records = await models.Playlist.findAll();
+  console.log('HELLO');
+  const records = await models.Album.findAll();
   res.json(records.map((r) => r.toJSON()));
 });
 
 router.get('/:id', async (req, res) => {
-  const record = await models.Playlist.findByPk(req.params.id);
+  const record = await models.Album.findByPk(req.params.id);
   if (record) {
     res.json(record.toJSON());
   } else {
