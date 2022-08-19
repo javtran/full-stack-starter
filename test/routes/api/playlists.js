@@ -5,12 +5,13 @@ const session = require('supertest-session');
 
 const helper = require('../../helper');
 const app = require('../../../app');
+const models = require('../../../models');
 
 describe('/api/playlists', () => {
   let testSession;
 
   beforeEach(async () => {
-    await helper.loadFixtures(['playlists']);
+    await helper.loadFixtures(['playlists', 'users']);
     testSession = session(app);
   });
 
@@ -34,6 +35,16 @@ describe('/api/playlists', () => {
 
     it('returns NOT FOUND for an id not in the database', async () => {
       await testSession.get('/api/items/0').expect(HttpStatus.NOT_FOUND);
+    });
+  });
+
+  context('authenticated', () => {
+    beforeEach(async () => {
+      await testSession
+        .post('/api/auth/login')
+        .set('Accept', 'application/json')
+        .send({ email: 'email@address.com', password: 'password' })
+        .expect(HttpStatus.OK);
     });
   });
 });

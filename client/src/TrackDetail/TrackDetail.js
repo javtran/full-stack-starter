@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useAuthContext } from '../AuthContext';
 
 import TrackDetailHeader from './TrackDetailHeader/TrackDetailHeader';
 import './TrackDetail.scss';
@@ -23,6 +25,7 @@ function TrackDetail() {
     11: 'B',
   };
 
+  const { user } = useAuthContext();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -54,6 +57,7 @@ function TrackDetail() {
   return (
     <main className="container">
       <div>{data && <TrackDetailHeader prop={data} />}</div>
+      {user?.isAdmin && <Link to="edit">Edit</Link>}
       <div className="row d-flex justify-content-center"></div>
       {data && (
         <div className="circle__row">

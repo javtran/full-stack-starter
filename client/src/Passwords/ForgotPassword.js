@@ -24,7 +24,7 @@ function ForgotPassword() {
     <main className="container">
       <div className="row justify-content-center">
         <div className="col col-sm-10 col-md-8 col-lg-6 col-xl-4">
-          <div className="card">
+          <div className="card" style={{ background: 'rgb(44, 44, 44)' }}>
             <div className="card-body">
               <h2 className="card-title">Forgot your password?</h2>
               <p>Enter the email address you registered to receive a reset password link.</p>

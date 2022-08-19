@@ -36,6 +36,23 @@ const Api = {
       return instance.post('/api/auth/register', data);
     },
   },
+  playlists: {
+    index() {
+      return instance.get('/api/playlists');
+    },
+    get(id) {
+      return instance.get(`/api/playlists/${id}`);
+    },
+    create(data) {
+      return instance.post('/api/playlists', data);
+    },
+    update(id, data) {
+      return instance.patch(`/api/playlists/${id}`, data);
+    },
+    delete(id) {
+      return instance.delete(`/api/playlists${id}`);
+    },
+  },
   passwords: {
     reset(email) {
       return instance.post('/api/passwords', { email });

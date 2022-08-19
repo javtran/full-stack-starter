@@ -40,7 +40,7 @@ function Login() {
     <main className="container">
       <div className="row justify-content-center">
         <div className="col col-sm-10 col-md-8 col-lg-6 col-xl-4">
-          <div className="card">
+          <div className="card" style={{ background: 'rgb(44, 44, 44)' }}>
             <div className="card-body">
               <h2 className="card-title">Log in</h2>
               {location.state?.flash && <div className="alert alert-success">{location.state?.flash}</div>}
